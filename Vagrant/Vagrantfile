@@ -1,0 +1,15 @@
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+
+  # The Base Box 
+  config.vm.box = "ubuntu/bionic64"
+
+  # Create a forwarded port mapping which allows access to a specific port
+  # within the machine from a port on the host machine. In the example below,
+  # accessing "localhost:5433" will access port 5432 on the guest machine.
+  config.vm.network :forwarded_port, guest: 5432, host: 5433
+
+  # Run the shell script inline provisioner
+  config.vm.provision "shell", path: "setup.sh"
+end
